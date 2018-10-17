@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="doctrine.static_website.templates_dir">%kernel.project_dir%/templates</parameter>
+        <parameter key="doctrine.static_website.source_dir">%kernel.project_dir%/source</parameter>
+        <parameter key="doctrine.static_website.build_dir">%kernel.project_dir%/build-%kernel.environment%</parameter>
+    </parameters>
+
+    <services>
+        <service id="Doctrine\RST\Parser" />
+
+        <service id="Parsedown" class="Parsedown" />
+
+        <service id="Symfony\Component\Filesystem\Filesystem" />
+
+        <!--- Can we get rid of this? It should already be a service in Symfony? -->
+        <service id="Symfony\Component\HttpKernel\Controller\ArgumentResolver" />
+
+        <service id="Doctrine\StaticWebsiteGenerator\Routing\Router">
+            <argument type="collection"></argument>
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Site" />
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\Controller\ResponseFactory" />
+
+        <service id="Doctrine\StaticWebsiteGenerator\Controller\ControllerProvider">
+            <argument type="collection"></argument>
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\Controller\ControllerExecutor">
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Controller\ControllerProvider" />
+            <argument type="service" id="Symfony\Component\HttpKernel\Controller\ArgumentResolver" />
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\Twig\RoutingExtension">
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Routing\Router" />
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileParametersFactory" />
+
+        <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileFactory">
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Routing\Router" />
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileParametersFactory" />
+            <argument>%doctrine.static_website.source_dir%</argument>
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\Request\RequestCollectionProvider">
+            <argument type="collection"></argument>
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileFilesystemReader">
+            <argument>%doctrine.static_website.source_dir%</argument>
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileFactory" />
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileRouteReader">
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Routing\Router" />
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Request\RequestCollectionProvider" />
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileFactory" />
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileRepository">
+            <argument type="collection">
+                <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileFilesystemReader" />
+                <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileRouteReader" />
+            </argument>
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\Site">
+            <argument>Test</argument>
+            <argument>Test</argument>
+            <argument>http://lcl.doctrine-for-beginners.com:8080</argument>
+            <argument type="collection"></argument>
+            <argument>Test</argument>
+            <argument>dev</argument>
+            <argument></argument>
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\Twig\StringTwigRenderer">
+            <argument>%doctrine.static_website.templates_dir%</argument>
+            <argument type="collection">
+                <argument type="service" id="Doctrine\StaticWebsiteGenerator\Twig\RoutingExtension" />
+            </argument>
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileRenderer">
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Controller\ControllerExecutor" />
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Twig\StringTwigRenderer" />
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\Site" />
+            <argument>%doctrine.static_website.source_dir%</argument>
+            <argument>%doctrine.static_website.templates_dir%</argument>
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileBuilder">
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileRenderer" />
+            <argument type="service" id="Symfony\Component\Filesystem\Filesystem" />
+            <argument type="service" id="Parsedown" />
+            <argument type="service" id="Doctrine\RST\Parser" />
+            <argument>%doctrine.static_website.templates_dir%</argument>
+        </service>
+
+        <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFilesBuilder">
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileBuilder" />
+        </service>
+
+        <service id="Doctrine\Bundle\DoctrineStaticWebsiteGeneratorBundle\Command\BuildWebsiteCommand">
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFileRepository" />
+            <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFilesBuilder" />
+            <argument>%doctrine.static_website.build_dir%</argument>
+
+            <tag name="console.command" command="doctrine:build-website" />
+        </service>
+    </services>
+</container>

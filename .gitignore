@@ -1,3 +1,6 @@
 /vendor
 /.phpcs-cache
+/Tests/App/cache
+/Tests/App/logs
+/Tests/App/build-test
 

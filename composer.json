@@ -18,7 +18,8 @@
         "doctrine/static-website-generator": "dev-master",
         "erusev/parsedown": "^1.7",
         "symfony/config": "^4.1",
-        "symfony/dependency-injection": "^4.1"
+        "symfony/dependency-injection": "^4.1",
+        "symfony/framework-bundle": "^4.1"
     },
     "require-dev": {
         "doctrine/coding-standard": "^5.0",
@@ -38,7 +39,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Doctrine\\Bundle\\DoctrineStaticWebsiteGeneratorBundle\\Tests\\": "tests/"
+            "Doctrine\\Bundle\\DoctrineStaticWebsiteGeneratorBundle\\Tests\\": "Tests/",
+            "App\\": "Tests/App/src/"
         }
     }
 }

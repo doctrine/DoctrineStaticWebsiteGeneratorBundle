@@ -1,0 +1,43 @@
+parameters:
+    doctrine.static_website.routes:
+        homepage:
+            path: /index.html
+            controller: App\Controller\UserController::index
+
+        user:
+            path: /user/{username}.html
+            controller: App\Controller\UserController::user
+            provider: App\Requests\UserRequests::getUsers
+
+services:
+    App\Repositories\UserRepository:
+        factory: 'Doctrine\Bundle\DoctrineSkeletonMapperBundle\ObjectRepositoryFactory:createRepository'
+        arguments:
+            - '@App\DataSources\Users'
+            - 'App\Repositories\UserRepository'
+            - 'App\Models\User'
+
+    App\DataSources\Users: ~
+
+    App\Requests\UserRequests:
+        arguments:
+            - '@App\Repositories\UserRepository'
+
+    App\Controller\UserController:
+        arguments:
+            - '@App\Repositories\UserRepository'
+
+    Doctrine\StaticWebsiteGenerator\Controller\ControllerProvider:
+        arguments:
+            -
+                - '@App\Controller\UserController'
+
+    Doctrine\StaticWebsiteGenerator\Request\RequestCollectionProvider:
+        arguments:
+            -
+                - '@App\Requests\UserRequests'
+
+framework:
+    secret: DoctrineStaticWebsiteGeneratorBundle
+    session:
+        storage_id: session.storage.mock_file

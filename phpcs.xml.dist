@@ -14,6 +14,9 @@
     <file>Tests</file>
 
     <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>Tests/App/build-test/*</exclude-pattern>
+    <exclude-pattern>Tests/App/cache/*</exclude-pattern>
+    <exclude-pattern>Tests/App/logs/*</exclude-pattern>
 
     <rule ref="Doctrine"/>
 </ruleset>

@@ -10,4 +10,5 @@ parameters:
       - Tests
 
     excludes_analyse:
-        - %rootDir%/vendor
+        - */vendor
+        - */Tests/App/cache/*

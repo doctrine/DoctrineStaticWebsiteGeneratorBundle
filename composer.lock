@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f7080319a1ad0ba2151297f08713421",
+    "content-hash": "ca1702e95f1cab666f1f99d80ad5fbdb",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -301,20 +301,20 @@
         },
         {
             "name": "doctrine/doctrine-skeleton-mapper-bundle",
-            "version": "dev-master",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineSkeletonMapperBundle.git",
-                "reference": "4c59d1b7c1eb00e62b96a6b560ddb8f7805572eb"
+                "reference": "2927f174d07a09972cf7956167bbf25194f6a90d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineSkeletonMapperBundle/zipball/4c59d1b7c1eb00e62b96a6b560ddb8f7805572eb",
-                "reference": "4c59d1b7c1eb00e62b96a6b560ddb8f7805572eb",
+                "url": "https://api.github.com/repos/doctrine/DoctrineSkeletonMapperBundle/zipball/2927f174d07a09972cf7956167bbf25194f6a90d",
+                "reference": "2927f174d07a09972cf7956167bbf25194f6a90d",
                 "shasum": ""
             },
             "require": {
-                "doctrine/skeleton-mapper": "dev-master",
+                "doctrine/skeleton-mapper": "^0.0.1",
                 "php": "^7.1",
                 "symfony/config": "^4.1",
                 "symfony/dependency-injection": "^4.1"
@@ -345,7 +345,7 @@
                 }
             ],
             "description": "Symfony DoctrineSkeletonMapperBundle",
-            "time": "2018-10-17T05:16:14+00:00"
+            "time": "2018-10-22T22:48:11+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -751,16 +751,16 @@
         },
         {
             "name": "doctrine/rst-parser",
-            "version": "dev-master",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/rst-parser.git",
-                "reference": "922bdb8378362245cc823f6b187afa54d95894f2"
+                "reference": "b95e50136f376b8e4529d21a7d83618669408b43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/rst-parser/zipball/922bdb8378362245cc823f6b187afa54d95894f2",
-                "reference": "922bdb8378362245cc823f6b187afa54d95894f2",
+                "url": "https://api.github.com/repos/doctrine/rst-parser/zipball/b95e50136f376b8e4529d21a7d83618669408b43",
+                "reference": "b95e50136f376b8e4529d21a7d83618669408b43",
                 "shasum": ""
             },
             "require": {
@@ -807,11 +807,11 @@
                 "reStructuredText",
                 "rst"
             ],
-            "time": "2018-10-09T15:34:45+00:00"
+            "time": "2018-10-22T22:16:31+00:00"
         },
         {
             "name": "doctrine/skeleton-mapper",
-            "version": "dev-master",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/skeleton-mapper.git",
@@ -870,22 +870,22 @@
         },
         {
             "name": "doctrine/static-website-generator",
-            "version": "dev-master",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/static-website-generator.git",
-                "reference": "3cc0c5224a6f30cffbcc5c58e10356007a4c9aff"
+                "reference": "e2030e5f5fa327fa9e9735f47832a519a8052c51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/static-website-generator/zipball/3cc0c5224a6f30cffbcc5c58e10356007a4c9aff",
-                "reference": "3cc0c5224a6f30cffbcc5c58e10356007a4c9aff",
+                "url": "https://api.github.com/repos/doctrine/static-website-generator/zipball/e2030e5f5fa327fa9e9735f47832a519a8052c51",
+                "reference": "e2030e5f5fa327fa9e9735f47832a519a8052c51",
                 "shasum": ""
             },
             "require": {
                 "doctrine/collections": "^1.5",
-                "doctrine/rst-parser": "dev-master",
-                "doctrine/skeleton-mapper": "dev-master",
+                "doctrine/rst-parser": "^0.0.1",
+                "doctrine/skeleton-mapper": "^0.0.1",
                 "erusev/parsedown": "^1.7",
                 "php": "^7.1",
                 "symfony/filesystem": "^4.1",
@@ -903,7 +903,7 @@
                 "phpstan/phpstan-strict-rules": "^0.10",
                 "phpunit/phpunit": "^7.0"
             },
-            "type": "project",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "Doctrine\\StaticWebsiteGenerator\\": "lib/"
@@ -921,7 +921,7 @@
                 }
             ],
             "description": "Doctrine Static Website Generator",
-            "time": "2018-10-18T02:53:08+00:00"
+            "time": "2018-10-22T22:15:06+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -4733,12 +4733,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "doctrine/doctrine-skeleton-mapper-bundle": 20,
-        "doctrine/rst-parser": 20,
-        "doctrine/skeleton-mapper": 20,
-        "doctrine/static-website-generator": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

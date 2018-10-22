@@ -25,6 +25,7 @@
         <parameter key="doctrine.static_website.templates_dir">%kernel.project_dir%/templates</parameter>
         <parameter key="doctrine.static_website.source_dir">%kernel.project_dir%/source</parameter>
         <parameter key="doctrine.static_website.build_dir">%kernel.project_dir%/build-%kernel.environment%</parameter>
+        <parameter key="doctrine.static_website.non_renderable_patterns" type="collection"></parameter>
     </parameters>
 
     <services>
@@ -108,6 +109,7 @@
             <argument type="service" id="Doctrine\StaticWebsiteGenerator\Twig\StringTwigRenderer" />
             <argument type="service" id="Doctrine\StaticWebsiteGenerator\Site" />
             <argument>%doctrine.static_website.templates_dir%</argument>
+            <argument>%doctrine.static_website.source_dir%</argument>
         </service>
 
         <service id="Doctrine\StaticWebsiteGenerator\SourceFile\Converters\MarkdownConverter">
@@ -125,6 +127,7 @@
                 <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\Converters\MarkdownConverter" />
                 <argument type="service" id="Doctrine\StaticWebsiteGenerator\SourceFile\Converters\ReStructuredTextConverter" />
             </argument>
+            <argument>%doctrine.static_website.non_renderable_patterns%</argument>
         </service>
 
         <service id="Doctrine\StaticWebsiteGenerator\SourceFile\SourceFilesBuilder">

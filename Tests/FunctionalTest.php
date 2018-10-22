@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use function assert;
 use function file_exists;
 use function file_get_contents;
+use function trim;
 
 class FunctionalTest extends TestCase
 {
@@ -53,6 +54,10 @@ class FunctionalTest extends TestCase
         self::assertContains('Controller Data: This data came from the controller', $indexContents);
 
         self::assertContains('Request Data: /index.html', $indexContents);
+
+        $apiIndexContents = $this->getFileContents($buildDir, 'api/index.html');
+
+        self::assertSame('This file should not be rendered.', trim($apiIndexContents));
 
         $jwageContents = $this->getFileContents($buildDir, 'user/jwage.html');
 

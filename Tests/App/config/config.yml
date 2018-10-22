@@ -9,6 +9,8 @@ parameters:
             controller: App\Controller\UserController::user
             provider: App\Requests\UserRequests::getUsers
 
+    doctrine.static_website.non_renderable_patterns: ['/\/api\//']
+
 services:
     App\Repositories\UserRepository:
         factory: 'Doctrine\Bundle\DoctrineSkeletonMapperBundle\ObjectRepositoryFactory:createRepository'
